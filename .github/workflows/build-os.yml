@@ -39,8 +39,8 @@ jobs:
         run: |
           if [[ "${{ matrix.major_version }}" -ge "40" ]] && \
             grep "${{ matrix.image_name }}" <<< "silverblue, kinoite"; then
-              echo "SOURCE_ORG=fedora" >> $GITHUB_ENV
-              echo "SOURCE_IMAGE=fedora-${{ matrix.image_name }}" >> $GITHUB_ENV
+              echo "SOURCE_ORG=fedora-ostree-desktops" >> $GITHUB_ENV
+              echo "SOURCE_IMAGE=${{ matrix.image_name }}" >> $GITHUB_ENV
           else
               if [[ "${{ matrix.image_name }}" == "lxqt" || "${{ matrix.image_name }}" == "mate" ]]; then
                   echo "SOURCE_IMAGE=base" >> $GITHUB_ENV
