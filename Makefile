@@ -2,37 +2,39 @@ CACHE_CONTAINERFILE ?= build.Containerfile
 OS_CONTAINERFILE ?= Containerfile
 DEBUG_CONTAINERFILE ?= debug.Containerfile
 
-FEDORA_MAJOR_VERSION ?= 40
+FEDORA_MAJOR_VERSION ?= 41
 REGISTRY ?= ghcr.io/joshua-stone
+ORG ?= rose-os
+FLAVOR ?= silverblue
+TAG ?= latest
+ARCH ?= $(shell uname -m)
 
 PULL ?= --pull=newer
 SQUASH ?= --squash
 RM_ARG ?= --rm
+
 CACHE_IMAGE_NAME ?= fedora-minimal
 CACHE_SOURCE_IMAGE ?= fedora-minimal
 CACHE_SOURCE_ORG ?= fedora
 CACHE_BASE_IMAGE ?= quay.io/$(CACHE_SOURCE_ORG)/$(CACHE_SOURCE_IMAGE)
 
-CACHE_TAG ?= $(REGISTRY)/rose-os-rpms:$(FEDORA_MAJOR_VERSION)
-
-OS_IMAGE_NAME ?= silverblue
-OS_SOURCE_IMAGE ?= silverblue
+OS_IMAGE_NAME ?= $(FLAVOR)
+OS_SOURCE_IMAGE ?= $(FLAVOR)
 OS_SOURCE_ORG ?= fedora-ostree-desktops
 OS_BASE_IMAGE ?= quay.io/$(OS_SOURCE_ORG)/$(OS_SOURCE_IMAGE)
 
-OS_TAG ?= $(REGISTRY)/rose-os-$(OS_IMAGE_NAME):$(FEDORA_MAJOR_VERSION)
-
-
-DEBUG_IMAGE_NAME ?= rose-os-silverblue
-DEBUG_SOURCE_IMAGE ?= rose-os-silverblue
+DEBUG_IMAGE_NAME ?= $(ORG)-$(FLAVOR)
+DEBUG_SOURCE_IMAGE ?= $(ORG)-$(FLAVOR)
 DEBUG_SOURCE_ORG ?= joshua-stone
 DEBUG_BASE_IMAGE=$(REGISTRY)/$(DEBUG_SOURCE_IMAGE)
 
-DEBUG_TAG ?= $(REGISTRY)/rose-os-$(OS_IMAGE_NAME)-debug:$(FEDORA_MAJOR_VERSION)
+all: build-rpm-cache build-os-image build-debug-image build-iso
 
-all: build-rpm-cache build-os-image build-debug-image
+build-iso :
+	[[ -n "$(PULL)" ]] && podman pull --arch="$(ARCH)" "$(REGISTRY)/$(ORG)-$(FLAVOR):$(TAG)" ||:
+	./build-iso.sh $(REGISTRY) $(ORG) $(FLAVOR) $(TAG) $(ARCH) $(FEDORA_MAJOR_VERSION)
 
-build-rpm-cache:
+build-rpm-cache :
 	podman build $(RM_ARG) $(PULL) $(SQUASH) \
 		--file $(CACHE_CONTAINERFILE) \
 		--build-arg IMAGE_NAME=$(CACHE_IMAGE_NAME) \
@@ -40,9 +42,9 @@ build-rpm-cache:
 		--build-arg SOURCE_ORG=$(CACHE_SOURCE_ORG) \
 		--build-arg BASE_IMAGE=$(CACHE_BASE_IMAGE) \
 		--build-arg FEDORA_MAJOR_VERSION=$(FEDORA_MAJOR_VERSION) \
-		--tag $(CACHE_TAG)
+		--tag $(REGISTRY)/$(ORG)-rpms:$(FEDORA_MAJOR_VERSION)
 
-build-os-image:
+build-os-image :
 	podman build $(RM_ARG) $(PULL) $(SQUASH) \
 		--file $(OS_CONTAINERFILE) \
 		--build-arg IMAGE_NAME=$(OS_IMAGE_NAME) \
@@ -50,9 +52,9 @@ build-os-image:
 		--build-arg SOURCE_ORG=$(OS_SOURCE_ORG) \
 		--build-arg BASE_IMAGE=$(OS_BASE_IMAGE) \
 		--build-arg FEDORA_MAJOR_VERSION=$(FEDORA_MAJOR_VERSION) \
-		--tag $(OS_TAG)
+		--tag $(REGISTRY)/$(ORG)-$(OS_IMAGE_NAME):$(FEDORA_MAJOR_VERSION)
 
-build-debug-image:
+build-debug-image :
 	podman build $(RM_ARG) $(PULL) $(SQUASH) \
 		--file $(DEBUG_CONTAINERFILE) \
 		--build-arg IMAGE_NAME=$(DEBUG_IMAGE_NAME) \
@@ -60,4 +62,4 @@ build-debug-image:
 		--build-arg SOURCE_ORG=$(DEBUG_SOURCE_ORG) \
 		--build-arg BASE_IMAGE=$(DEBUG_BASE_IMAGE) \
 		--build-arg FEDORA_MAJOR_VERSION=$(FEDORA_MAJOR_VERSION) \
-		--tag $(DEBUG_TAG)
+		--tag $(REGISTRY)/$(ORG)-$(OS_IMAGE_NAME)-debug:$(FEDORA_MAJOR_VERSION)
