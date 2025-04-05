@@ -6,7 +6,6 @@ A set of OS images based on the [Universal Blue project](https://universal-blue.
 
 # Features:
 
-* Wayland-only; no X11 sessions
 * mesa-freeworld, ffmpegthumbnailer, and gnome-epub-thumbnailer provide support for more file formats
 * alsa-firmware and pipewire-codec-aptx provide broader audio support
 * solaar-udev provides runtime support files for [Solaar](https://flathub.org/apps/io.github.pwr_solaar.solaar)
