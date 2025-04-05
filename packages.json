@@ -3,8 +3,6 @@
         "include": {
             "all": [
                 "alsa-firmware",
-                "bootc",
-                "bootupd",
                 "ffmpeg",
                 "ffmpeg-libs",
                 "ffmpegthumbnailer",
@@ -59,6 +57,7 @@
             "all": [
                 "firefox",
                 "firefox-langpacks",
+                "ffmpeg-free",
 		"gimp",
 		"gimp-jxl-plugin",
                 "libavcodec-free",
@@ -118,47 +117,6 @@
                 "xorg-x11-drv-wacom-serial-support",
                 "xorg-x11-server-Xorg",
                 "xorg-x11-server-common"
-            ]
-        }
-    },
-    "41": {
-        "include": {
-            "all": [
-            ]
-        },
-        "exclude": {
-            "all": [
-                "default-fonts-cjk-sans",
-                "ffmpeg-free"
-            ]
-        }
-    },
-    "40": {
-        "include": {
-            "all": [
-            ]
-        },
-        "exclude": {
-            "all": [
-                "default-fonts-cjk-sans",
-                "ffmpeg-free"
-            ],
-            "silverblue": [
-                "gnome-classic-session-xsession"
-            ]
-        }
-    },
-    "39": {
-        "include": {
-            "all": [
-            ],
-            "kinoite": [
-                "xwaylandvideobridge"
-            ]
-        },
-        "exclude": {
-            "all": [
-                "default-fonts-cjk-sans"
             ]
         }
     }
