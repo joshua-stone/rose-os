@@ -1,7 +1,7 @@
 Name:           rose-os-just
 Packager:       rose-os
 Vendor:         rose-os
-Version:        0.2
+Version:        0.3
 Release:        1%{?dist}
 Summary:        Justfile support for rose-os
 License:        MIT
@@ -13,6 +13,8 @@ Source0:        rose-os-just.sh
 Source1:        flatpak-apps.txt
 Source2:        justfile
 Source3:        setup-flatpak-apps.sh
+
+Requires:       yt-dlp
 
 %global sub_name %{lua:t=string.gsub(rpm.expand("%{NAME}"), "^rose%-os%-", ""); print(t)}
 
@@ -36,6 +38,9 @@ install -Dm0755 %{SOURCE3} %{buildroot}%{_exec_prefix}/share/rose-os/just/setup-
 
 
 %changelog
+* Sun Apr 6 2025 Joshua Stone <joshua.gage.stone@gmail.com> - 0.3
+- Add yt-dlp support
+
 * Sat Apr 13 2024 Joshua Stone <joshua.gage.stone@gmail.com> - 0.2
 - Split up files into separate sources to work around tar permission issue
 

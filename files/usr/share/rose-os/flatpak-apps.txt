@@ -3,12 +3,13 @@ org.gnome.Boxes
 org.gnome.clocks
 org.gnome.Calculator
 org.gnome.Calendar
-org.gnome.Evince
 org.gnome.Loupe
 org.gnome.Maps
 org.gnome.NautilusPreviewer
+org.gnome.Papers
 org.gnome.Snapshot
 org.gnome.TextEditor
 org.gnome.Weather
 org.libreoffice.LibreOffice
 org.mozilla.firefox
+page.tesk.Refine
