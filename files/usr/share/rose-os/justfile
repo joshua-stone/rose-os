@@ -1,2 +1,5 @@
 setup-flatpak-apps:
     /usr/share/rose-os/just/setup-flatpak-apps.sh
+
+download-video-with-firefox URL:
+    yt-dlp --cookies-from-browser firefox {{URL}}
