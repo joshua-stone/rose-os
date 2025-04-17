@@ -2,7 +2,7 @@ CACHE_CONTAINERFILE ?= build.Containerfile
 OS_CONTAINERFILE ?= Containerfile
 DEBUG_CONTAINERFILE ?= debug.Containerfile
 
-FEDORA_MAJOR_VERSION ?= 41
+FEDORA_MAJOR_VERSION ?= 42
 REGISTRY ?= ghcr.io/joshua-stone
 ORG ?= rose-os
 FLAVOR ?= silverblue
