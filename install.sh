@@ -8,7 +8,7 @@ wget -P /tmp/rpms \
     https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-${RELEASE}.noarch.rpm \
     https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-${RELEASE}.noarch.rpm
 
-rpm-ostree install \
+dnf install --assumeyes --setopt install_weak_deps=0 \
     /tmp/rpms/*.rpm \
     fedora-repos-archive
 
