@@ -1,0 +1,45 @@
+{
+    "all": {
+        "include": {
+            "all": [
+                "lorax"
+            ],
+            "rose-os-silverblue": [
+            ],
+            "kinoite": [
+            ]
+        },
+        "exclude": {
+            "all": [
+            ],
+            "silverblue": [
+            ],
+            "kinoite": [
+            ]
+        }
+    },
+    "40": {
+        "include": {
+            "all": [
+            ]
+        },
+        "exclude": {
+            "all": [
+            ],
+            "silverblue": [
+            ]
+        }
+    },
+    "39": {
+        "include": {
+            "all": [
+            ],
+            "kinoite": [
+            ]
+        },
+        "exclude": {
+            "all": [
+            ]
+        }
+    }
+}
