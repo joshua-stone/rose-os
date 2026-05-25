@@ -16,6 +16,7 @@
                 "libva-intel-driver",
                 "libva-utils",
                 "lshw",
+                "lorax",
                 "mesa-filesystem",
                 "mesa-va-drivers-freeworld",
                 "net-tools",
