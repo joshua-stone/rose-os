@@ -15,6 +15,7 @@
                 "libjxl-utils",
                 "libva-intel-driver",
                 "libva-utils",
+                "lm_sensors",
                 "lshw",
                 "mesa-filesystem",
                 "mesa-va-drivers-freeworld",
