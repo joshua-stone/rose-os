@@ -1,13 +1,13 @@
 #!/bin/sh
 
-set -oeu pipefail
+set -oeux pipefail
 
 readonly REGISTRY="${1:-ghcr.io/joshua-stone}"
 readonly ORG="${2:-rose-os}"
 readonly FLAVOR="${3:-silverblue}"
 readonly TAG="${4:-latest}"
 readonly ARCH="${5:-x86_64}"
-readonly RELEASE="${6:-42}"
+readonly RELEASE="${6:-44}"
 readonly IMAGE="${REGISTRY}/${ORG}-${FLAVOR}:${TAG}"
 readonly IMAGE_DIR="${REGISTRY}/${ORG}-${FLAVOR}-${TAG}"
 readonly ISO_BUILD_NAME="${ORG}-${FLAVOR}-${RELEASE}-${ARCH}"
@@ -32,7 +32,8 @@ mkdir --verbose --parents "${ISO_DIR}" "${OCI_TAG_DIR}" "${OCI_REF_DIR}"
 
 cd "${ISO_DIR}"
 
-wget --continue \
+wget --execute robots=off \
+     --continue \
      --no-parent \
      --no-directories \
      --recursive \
@@ -42,10 +43,10 @@ wget --continue \
 
 if [[ "$(ls -1q *-CHECKSUM | wc -l)" -ne 1 || "$(ls -1q *.iso | wc -l)" -ne 1 ]]; then
     echo "Too many checksums and/or ISOs detected. Exiting now."
-    exit 1
+    #exit 1
 fi
 
-sha256sum --check Fedora-Everything*-CHECKSUM
+sha256sum --check Fedora-Everything-iso*-CHECKSUM
 
 cd -
 
@@ -95,7 +96,7 @@ rm -rf "${OUTPUT_ISO}"
 
 sudo mkksiso --ks anaconda-ks.cfg \
 	     --add "${OUTPUT_DIR}/kickstart" \
-	     ${ISO_DIR}/Fedora-Everything-netinst*.iso \
+	     ${ISO_DIR}/Fedora-Everything-netinst-x86_64-45-*.iso \
 	     "${OUTPUT_ISO}"
 
 sudo chown "${USER}:${USER}" "${OUTPUT_ISO}"

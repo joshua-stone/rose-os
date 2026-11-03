@@ -21,13 +21,12 @@ jobs:
       matrix:
         image_name:
           - fedora-minimal
-        major_version: [44]
+        major_version: [45]
         include:
-          - major_version: 44
+          - major_version: 45
             is_latest_version: true
             is_stable_version: true
             is_gts_version: false
-
     steps:
       # Checkout push-to-registry action GitHub repository
       - name: Checkout Push to Registry action
