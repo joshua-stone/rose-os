@@ -15,7 +15,7 @@ dnf install --assumeyes --setopt install_weak_deps=0 \
 rpm --import /usr/etc/pki/rpm-gpg/RPM-GPG-KEY-rose-os
 
 # after F43 launches, bump to 44
-if [[ "${FEDORA_MAJOR_VERSION}" -ge 43 ]]; then
+if [[ "${FEDORA_MAJOR_VERSION}" -ge 46 ]]; then
     sed -i 's%free/fedora/releases%free/fedora/development%' /etc/yum.repos.d/rpmfusion-*.repo
 fi
 

@@ -22,9 +22,9 @@ jobs:
         image_name:
           - silverblue
           - kinoite
-        major_version: [44]
+        major_version: [45]
         include:
-          - major_version: 44
+          - major_version: 45
             is_latest_version: true
             is_stable_version: true
             is_gts_version: false
