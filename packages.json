@@ -28,6 +28,7 @@
                 "pipewire-codec-aptx",
                 "smartmontools",
                 "symlinks",
+		"systemd-boot-x64",
                 "tcpdump",
                 "traceroute",
                 "vim",
